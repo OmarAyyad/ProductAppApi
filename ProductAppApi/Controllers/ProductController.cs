@@ -56,7 +56,7 @@ namespace ProductAppApi.Controllers
             Product pro = uni.Products.Find(p => p.Id == id).SingleOrDefault();
             if (pro == null)
             {
-                return NotFound(JsonConvert.SerializeObject(new { ErrorMessage = "There's no product with id = " + id }));
+                return NotFound(JsonConvert.SerializeObject(new { id = new string[]{string.Format("The value '{0}' is not found.",id )} }));
             }
             return new JsonResult(uni.Products.Find(p => p.Id == id).SingleOrDefault());
         }
@@ -113,7 +113,7 @@ namespace ProductAppApi.Controllers
             else
             {
                 ModelStateDictionary keys = new ModelStateDictionary();
-                return NotFound(JsonConvert.SerializeObject(new { ErrorMessage = "There's no product with id = " + id }));
+                return NotFound(JsonConvert.SerializeObject(new { id = new string[]{string.Format("The value '{0}' is not found.",id )} }));
             }
         }
 
@@ -134,7 +134,7 @@ namespace ProductAppApi.Controllers
             }
             else
             {
-                return NotFound(JsonConvert.SerializeObject(new { ErrorMessage = "There's no product with id = " + id }));
+                return NotFound(JsonConvert.SerializeObject(new { id = new string[]{string.Format("The value '{0}' is not found.",id )} }));
             }
 
         }
