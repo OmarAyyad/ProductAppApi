@@ -91,6 +91,14 @@
             it's needed when having behaviers that is spacific to this entity
             </summary>
         </member>
+        <member name="M:ProductAppApi.Core.IRepository.IProduct.MapProduct(System.Int32,ProductAppApi.Core.Domain.Product)">
+            <summary>
+            here's where we map product for update
+            </summary>
+            <param name="id"></param>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
         <member name="T:ProductAppApi.Core.IRepository.IRepository`1">
             <summary>
             this is the IRepository interface to determine the guidlines that the behavior of every entity should be
@@ -212,6 +220,14 @@
             so that it can do the work and manipulate data
             </summary>
             <param name="dbContext"></param>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.ProductRepository.MapProduct(System.Int32,ProductAppApi.Core.Domain.Product)">
+            <summary>
+            this is the implementation of mapping update func
+            </summary>
+            <param name="id"></param>
+            <param name="product"></param>
+            <returns></returns>
         </member>
         <member name="T:ProductAppApi.Persistance.Repository.Repository`1">
             <summary>

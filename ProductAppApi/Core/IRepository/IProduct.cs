@@ -13,5 +13,12 @@ namespace ProductAppApi.Core.IRepository
     /// </summary>
     public interface IProduct:IRepository<Product>
     {
+       /// <summary>
+       /// here's where we map product for update
+       /// </summary>
+       /// <param name="id"></param>
+       /// <param name="product"></param>
+       /// <returns></returns>
+        Product MapProduct(int id ,Product product);
     }
 }

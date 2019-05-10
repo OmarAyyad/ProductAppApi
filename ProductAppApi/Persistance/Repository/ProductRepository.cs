@@ -23,5 +23,21 @@ namespace ProductAppApi.Persistance.Repository
         public ProductRepository(DbContext dbContext) : base(dbContext)
         {
         }
+        /// <summary>
+        /// this is the implementation of mapping update func
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public Product MapProduct(int id, Product product)
+        {
+           Product old = this.Get(id);
+           old.Name = product.Name;
+            old.Price = product.Price;
+            old.ImgUrl = product.ImgUrl;
+            old.CompanyName = product.CompanyName; 
+
+            return old;
+        }
     }
 }

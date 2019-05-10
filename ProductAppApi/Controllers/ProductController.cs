@@ -79,8 +79,8 @@ namespace ProductAppApi.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Product product)
         {
-            product.Id=id;
-            uni.Products.Update(product);
+            
+            uni.Products.Update(uni.Products.MapProduct(id,product));
             uni.complete();
         }
 

@@ -33,8 +33,9 @@ namespace ProductAppApi
             ///such as connection string and making it a singleton .. created once in the life time of the app
             ///</summary>
             services.AddDbContext<ProductContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ProductCon"))
-            ,ServiceLifetime.Singleton);
+            , ServiceLifetime.Singleton);
 
+            services.AddCors();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -50,6 +51,19 @@ namespace ProductAppApi
             {
                 app.UseHsts();
             }
+
+
+
+            ///<summary>
+            ///allowing any origin or method of header or credentials
+            ///not a good thing security wise 
+            ///it's done to make the front end a little bit easier
+            /// </summary>
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseHttpsRedirection();
             app.UseMvc();

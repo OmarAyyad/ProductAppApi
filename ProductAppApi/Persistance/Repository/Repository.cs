@@ -64,7 +64,7 @@ namespace ProductAppApi.Persistance.Repository
         /// <returns></returns>
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-             return entities.Where(predicate);
+            return entities.Where(predicate);
         }
 
 
@@ -74,10 +74,14 @@ namespace ProductAppApi.Persistance.Repository
         /// <param name="entity"></param>
         public void Update(TEntity entity)
         {
-            entities.Attach(entity);
-            dbContext.Entry(entity).State =  EntityState.Modified;
+            if (dbContext.Entry(entity).State == EntityState.Detached)
+            {
 
-         }
+                entities.Attach(entity);
+            }
+            dbContext.Entry(entity).State = EntityState.Modified;
+
+        }
 
         /// <summary>
         /// get method that takes id and return the entity after finding it
