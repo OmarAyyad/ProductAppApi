@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Newtonsoft.Json;
 using ProductAppApi.Core.Domain;
 using ProductAppApi.Persistance;
 
@@ -49,10 +51,17 @@ namespace ProductAppApi.Controllers
         /// <returns></returns>
         // GET api/Product/5
         [HttpGet("{id}")]
-        public JsonResult Get(int id)
+        public ActionResult Get(int id)
         {
-            return new JsonResult( uni.Products.Find(p => p.Id == id).SingleOrDefault());
+            Product pro = uni.Products.Find(p => p.Id == id).SingleOrDefault();
+            if (pro == null)
+            {
+                return NotFound(JsonConvert.SerializeObject(new { ErrorMessage = "There's no product with id = " + id }));
+            }
+            return new JsonResult(uni.Products.Find(p => p.Id == id).SingleOrDefault());
         }
+
+
 
 
         /// <summary>
@@ -63,10 +72,26 @@ namespace ProductAppApi.Controllers
 
         // POST api/Product
         [HttpPost]
-        public void Post([FromBody] Product product)
+        public ActionResult Post([FromBody] Product product)
         {
-            uni.Products.Add(product);
-            uni.complete();
+            if (product.Id == 0)
+            {
+
+                uni.Products.Add(product);
+                int rowaff = uni.complete();
+                if (rowaff > 0)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest(JsonConvert.SerializeObject(new { ErrorMessage = "No product was added" }));
+                }
+            }
+            else
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { ErrorMessage = "Please Don't include the id with the product as it's generated" }));
+            }
         }
 
         /// <summary>
@@ -77,11 +102,19 @@ namespace ProductAppApi.Controllers
         /// <param name="product"></param>
         // PUT api/Product/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Product product)
+        public ActionResult Put(int id, [FromBody] Product product)
         {
-            
-            uni.Products.Update(uni.Products.MapProduct(id,product));
-            uni.complete();
+            if (uni.Products.Get(id) != null && id != 0)
+            {
+                uni.Products.Update(uni.Products.MapProduct(id, product));
+                uni.complete();
+                return Ok();
+            }
+            else
+            {
+                ModelStateDictionary keys = new ModelStateDictionary();
+                return NotFound(JsonConvert.SerializeObject(new { ErrorMessage = "There's no product with id = " + id }));
+            }
         }
 
         /// <summary>
@@ -91,10 +124,18 @@ namespace ProductAppApi.Controllers
         /// <param name="id"></param>
         // DELETE api/Product/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-            uni.Products.Remove(id);
-            uni.complete();
+            if (uni.Products.Get(id) != null)
+            {
+                uni.Products.Remove(id);
+                uni.complete();
+                return Ok();
+            }
+            else
+            {
+                return NotFound(JsonConvert.SerializeObject(new { ErrorMessage = "There's no product with id = " + id }));
+            }
 
         }
     }
