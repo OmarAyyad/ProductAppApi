@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProductAppApi</name>
+    </assembly>
+    <members>
+        <member name="T:ProductAppApi.Controllers.ProductController">
+            <summary>
+            This is the Api Controller 
+            that includes the get , get by id , post , put and delete
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Controllers.ProductController.#ctor(ProductAppApi.Persistance.ProductContext)">
+            <summary>
+            This is the product constructor 
+            that we can inject the context and instantiate our unit of work 
+            </summary>
+            <param name="productContext"></param>
+        </member>
+        <member name="M:ProductAppApi.Controllers.ProductController.Get">
+            <summary>
+            this is the get all JsonResult 
+            that inherits from actionresult class that would return all the listing data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Controllers.ProductController.Get(System.Int32)">
+            <summary>
+            this is the get by id jsonresult
+            that would take the id and search for it through the find method
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Controllers.ProductController.Post(ProductAppApi.Core.Domain.Product)">
+            <summary>
+            this is our post method
+            that takes an entity (which is Product) and add it to the DataBase
+            </summary>
+            <param name="product"></param>
+        </member>
+        <member name="M:ProductAppApi.Controllers.ProductController.Put(System.Int32,ProductAppApi.Core.Domain.Product)">
+            <summary>
+            this is the put method 
+            that is used to update a certain entity using it's id and the modefied object
+            </summary>
+            <param name="id"></param>
+            <param name="product"></param>
+        </member>
+        <member name="M:ProductAppApi.Controllers.ProductController.Delete(System.Int32)">
+            <summary>
+            this is the delete method 
+            that takes the id and removes the entity from Database
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:ProductAppApi.Core.Domain.Product">
+            <summary>
+            this is the Product Model
+            </summary>
+        </member>
+        <member name="P:ProductAppApi.Core.Domain.Product.Id">
+            <summary>
+            this is the unique identifier 
+            that is used for multiple uses (find,update and delete)
+            </summary>
+        </member>
+        <member name="P:ProductAppApi.Core.Domain.Product.Name">
+            <summary>
+            this is the name of the product
+            </summary>
+        </member>
+        <member name="P:ProductAppApi.Core.Domain.Product.Price">
+            <summary>
+            this is the price of the product
+            </summary>
+        </member>
+        <member name="P:ProductAppApi.Core.Domain.Product.CompanyName">
+            <summary>
+            this is the company name that manufactured the product
+            </summary>
+        </member>
+        <member name="P:ProductAppApi.Core.Domain.Product.ImgUrl">
+            <summary>
+            this is the image url for the product view
+            </summary>
+        </member>
+        <member name="T:ProductAppApi.Core.IRepository.IProduct">
+            <summary>
+            this is the IProduct interface
+            it's needed when having behaviers that is spacific to this entity
+            </summary>
+        </member>
+        <member name="T:ProductAppApi.Core.IRepository.IRepository`1">
+            <summary>
+            this is the IRepository interface to determine the guidlines that the behavior of every entity should be
+            and the generic TEntity must be class and not any other type
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:ProductAppApi.Core.IRepository.IRepository`1.Get(System.Int32)">
+            <summary>
+            get method that takes id and returns the entity for that id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Core.IRepository.IRepository`1.GetAll">
+            <summary>
+            get all method that take no parameter and return all entities
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Core.IRepository.IRepository`1.Find(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            find method the takes a lambda expresstion and returns the searched entity 
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Core.IRepository.IRepository`1.Add(`0)">
+            <summary>
+            add method that takes an entity to add 
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ProductAppApi.Core.IRepository.IRepository`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            add range method that takes IEnumerable of entities to add that range of entities
+            </summary>
+            <param name="entities"></param>
+        </member>
+        <member name="M:ProductAppApi.Core.IRepository.IRepository`1.Update(`0)">
+            <summary>
+            update method that takes an entity to update 
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ProductAppApi.Core.IRepository.IRepository`1.Remove(System.Int32)">
+            <summary>
+            remove method that takes id and remove the entity from DataBase
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:ProductAppApi.Core.IRepository.IRepository`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            remove range method that takes IEnumerable of entities and remove them
+            </summary>
+            <param name="entities"></param>
+        </member>
+        <member name="T:ProductAppApi.Core.IUnitOfWork">
+            <summary>
+            this is the Iunitofwork interface to determine the guidlines for the unitofwork class
+            and it implements IDisposible so that we dispose the context when the work is done and not take much space in memory
+            </summary>
+        </member>
+        <member name="P:ProductAppApi.Core.IUnitOfWork.Products">
+            <summary>
+            property Products that we can get through the unitofwork
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Core.IUnitOfWork.complete">
+            <summary>
+            complete method that saves changes to the context and therefor the Database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ProductAppApi.Persistance.EntityConfiguration.ProductConfiguration">
+            <summary>
+            This is the configuration of entity Product that would be mapped to DB
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Persistance.EntityConfiguration.ProductConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{ProductAppApi.Core.Domain.Product})">
+            <summary>
+            this is the configure method that take entity builder for product entity 
+            so that we can use fluent api to configure how the product entity look like in database
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:ProductAppApi.Persistance.ProductContext">
+            <summary>
+            this is the productContext that inhert from Dbcontext 
+            that allows me to add my dbsets and apply the configuration done in the entityconfiguration to the Database
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Persistance.ProductContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            here's how the dbcontext options is injected and passed to parent
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:ProductAppApi.Persistance.ProductContext.products">
+            <summary>
+            this is the dbset in which will have th data in from database
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Persistance.ProductContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            this is an override of onmodelcreating function to add my configuration in
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:ProductAppApi.Persistance.Repository.ProductRepository">
+            <summary>
+            this is the product repository implementing both repository the behavior of product 
+            so the general methods are included and the iproduct interface so that any spacific behavior is also included
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.ProductRepository.#ctor(Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            here's were we pass the injected dbcontext to the repository
+            so that it can do the work and manipulate data
+            </summary>
+            <param name="dbContext"></param>
+        </member>
+        <member name="T:ProductAppApi.Persistance.Repository.Repository`1">
+            <summary>
+            this is the repository class that implement Irepository of general behavior of entities
+            and that entity must be a class
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="F:ProductAppApi.Persistance.Repository.Repository`1.dbContext">
+            <summary>
+            init a member var dbcontext to use later to manipulate data
+            </summary>
+        </member>
+        <member name="F:ProductAppApi.Persistance.Repository.Repository`1.entities">
+            <summary>
+            just a member dbset of the entity to make things easier 
+            NOTE (code do all the work with dbcontext .. but this is more readable)
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.#ctor(Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            this is the constructor to get the injected dbcontext and give it's reference to our member dbcontext
+            </summary>
+            <param name="dbContext"></param>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.Add(`0)">
+            <summary>
+            add methoed that takes the entity and add it to entities in the dbcontext
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            add range methoed that takes range of entities and add them to entities in the dbcontext
+            </summary>
+            <param name="entities"></param>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.Find(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            find method that takes lambda expression and search for the entity of entities and return them
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.Update(`0)">
+            <summary>
+            update method that take the entity and update the new values
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.Get(System.Int32)">
+            <summary>
+            get method that takes id and return the entity after finding it
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.GetAll">
+            <summary>
+            get all method that return all entities of that same type Entity
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.Remove(System.Int32)">
+            <summary>
+            remove method that takes id and search for entity and remove it
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:ProductAppApi.Persistance.Repository.Repository`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            remove range method that takes the entities and remove them from dbcontext 
+            (and of course after calling the complete method it would be removed from Database and that goes for all behaviors except the search and get ones )
+            </summary>
+            <param name="entities"></param>
+        </member>
+        <member name="T:ProductAppApi.Persistance.UnitOfWork">
+            <summary>
+            this is the implementation of IUnitOfWork and here's where the magic happens 
+            all the work is done through here
+            </summary>
+        </member>
+        <member name="F:ProductAppApi.Persistance.UnitOfWork._dbContext">
+            <summary>
+            member product context to get the value of injected productcontext in
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Persistance.UnitOfWork.#ctor(ProductAppApi.Persistance.ProductContext)">
+            <summary>
+            here's where the product context is injected
+            and instantiating the product 
+            </summary>
+            <param name="dbContext"></param>
+        </member>
+        <member name="P:ProductAppApi.Persistance.UnitOfWork.Products">
+            <summary>
+            property of Iproduct so that you can access ur entity through here
+            </summary>
+        </member>
+        <member name="M:ProductAppApi.Persistance.UnitOfWork.complete">
+            <summary>
+            complete function to be called to save changes to database after (adding , updating and deleting entities)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ProductAppApi.Persistance.UnitOfWork.Dispose">
+            <summary>
+            dispose function to dispose the dbcontext when the work is done to keep a reusable space in memory
+            </summary>
+        </member>
+    </members>
+</doc>

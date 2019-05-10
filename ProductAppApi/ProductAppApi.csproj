@@ -5,6 +5,10 @@
     <UserSecretsId>51fb6e8b-fc82-406f-9a97-12ee9a5e6571</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\DELL\source\repos\ProductAppApi\ProductAppApi\ProductAppApiDecomentation.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>

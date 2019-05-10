@@ -28,8 +28,13 @@ namespace ProductAppApi
         public void ConfigureServices(IServiceCollection services)
         {
 
+            ///<summary>
+            ///this is where the product context is added taking it's values
+            ///such as connection string and making it a singleton .. created once in the life time of the app
+            ///</summary>
+            services.AddDbContext<ProductContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ProductCon"))
+            ,ServiceLifetime.Singleton);
 
-            services.AddDbContext<ProductContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ProductCon")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

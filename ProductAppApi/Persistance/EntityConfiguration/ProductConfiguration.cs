@@ -14,53 +14,71 @@ namespace ProductAppApi.Persistance.EntityConfiguration
     /// </summary>
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
-
-        public ProductConfiguration()
-        {
-
-
-
-        }
-
+        /// <summary>
+        /// this is the configure method that take entity builder for product entity 
+        /// so that we can use fluent api to configure how the product entity look like in database
+        /// </summary>
+        /// <param name="builder"></param>
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            //change the name of table
+            ///<summary>
+            ///change the name of table
+            /// </summary>
             builder.ToTable("products");
 
-            //Specifying the id of the table
+            ///<summary>
+            ///Specifying the id of the table
+            /// </summary>
             builder.HasKey(p => p.Id);
-            //Mapping the Name property to the PName Column 
-            //Specifying the type and max length
-            //making it required
+
+            ///<summary>
+            ///Mapping the Name property to the PName Column 
+            ///Specifying the length with the column type 
+            ///making it required
+            ///NOTE (of course it has a 'has max length' extension but it does some problems 
+            ///like making it's length to 1 in the migrations so that worked like a charm)
+            /// </summary>
             builder.Property(p => p.Name)
                 .HasColumnName("PName")
                 .HasColumnType("nvarchar(50)")
                 .IsRequired();
-
-            //Mapping the Image property to the ImageUrl Column
-            //Specifying the type and max length
-            //making it required
+            ///<summary>
+            ///Mapping the Image property to the ImageUrl Column
+            ///Specifying the type and length
+            ///making it required
+            ///</summary>
             builder.Property(p => p.ImgUrl)
                 .HasColumnType("nvarchar(256)")
                 .IsRequired();
 
-            //Mapping the Price property to the Price Column
-            //making it required
+            ///<summary>
+            ///Mapping the Price property to the Price Column
+            ///making it required
+            ///</summary>
             builder.Property(p => p.Price)
                 .HasColumnType("float")
                 .IsRequired();
 
-            //Mapping the CompanyName property to the PCompanyName Column
-            //Specifying the type and max length
-            //making it required
+            ///<summary>
+            ///Mapping the CompanyName property to the PCompanyName Column
+            ///Specifying the type and max length
+            ///making it required
+            ///</summary>
             builder.Property(p => p.CompanyName)
                 .HasColumnName("CompanyName")
                 .HasColumnType("nvarchar(50)")
                 .IsRequired();
 
+
+            ///<summary>
+            ///this is the way of including some data with the migration 
+            ///but unfortunately the migration wouldn't accept it without a value for id
+            ///and the database wouldn't accept it with a value for id (so it's stuck there)
+            ///</summary>
+
             #region inserting some data
 
-
+            
 
             //builder.HasData(
             //         new 
