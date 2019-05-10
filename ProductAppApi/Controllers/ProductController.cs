@@ -20,18 +20,19 @@ namespace ProductAppApi.Controllers
             uni = new UnitOfWork(productContext);
         }
 
+        
         // GET api/Product
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public JsonResult Get()
         {
-            return uni.Products.GetAll().ToList();
+            return new JsonResult(uni.Products.GetAll().ToList());
         }
 
         // GET api/Product/5
         [HttpGet("{id}")]
-        public ActionResult<Product> Get(int id)
+        public JsonResult Get(int id)
         {
-            return uni.Products.Find(p => p.Id == id).SingleOrDefault();
+            return new JsonResult( uni.Products.Find(p => p.Id == id).SingleOrDefault());
         }
 
         // POST api/Product

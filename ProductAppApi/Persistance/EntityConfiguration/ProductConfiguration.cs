@@ -114,7 +114,7 @@ namespace ProductAppApi.Persistance.EntityConfiguration
             //         },
             //         new  
             //         {
-            //             Name = "Cooling & Heating Series 7 Inverter Split Air Conditioner",
+            //             Name = "Cooling & Heating Series 7 Inverter",
             //             Price = 15000,
             //             CompanyName = "Samsung",
             //             ImgUrl = "https://eg.jumia.is/ahqdn4JmC5WZvfOWEcwPx4zGb50=/fit-in/680x680/filters:fill(white)/product/49/76239/1.jpg?5083"
