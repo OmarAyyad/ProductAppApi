@@ -29,22 +29,19 @@ namespace ProductAppApi.Persistance.EntityConfiguration
 
             //Specifying the id of the table
             builder.HasKey(p => p.Id);
-            builder.Property(p=>p.Id).ValueGeneratedOnAdd();
             //Mapping the Name property to the PName Column 
             //Specifying the type and max length
             //making it required
             builder.Property(p => p.Name)
                 .HasColumnName("PName")
-                .HasColumnType("nvarchar")
-                .HasMaxLength(50)
+                .HasColumnType("nvarchar(50)")
                 .IsRequired();
 
             //Mapping the Image property to the ImageUrl Column
             //Specifying the type and max length
             //making it required
             builder.Property(p => p.ImgUrl)
-                .HasColumnType("nvarchar")
-                .HasMaxLength(255)
+                .HasColumnType("nvarchar(256)")
                 .IsRequired();
 
             //Mapping the Price property to the Price Column
@@ -58,8 +55,7 @@ namespace ProductAppApi.Persistance.EntityConfiguration
             //making it required
             builder.Property(p => p.CompanyName)
                 .HasColumnName("CompanyName")
-                .HasColumnType("nvarchar")
-                .HasMaxLength(50)
+                .HasColumnType("nvarchar(50)")
                 .IsRequired();
 
             #region inserting some data
