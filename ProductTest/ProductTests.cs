@@ -7,26 +7,26 @@ using Xunit;
 
 namespace ProductTest
 {
-   public class ProductTests: IClassFixture<TestFixture<Startup>>
-    {
-        private HttpClient Client;
+   //public class ProductTests: IClassFixture<TestFixture<Startup>>
+   // {
+   //     private HttpClient Client;
 
-        public ProductTests(TestFixture<Startup> fixture)
-        {
-            Client = fixture.Client;
-        }
+   //     public ProductTests(TestFixture<Startup> fixture)
+   //     {
+   //         Client = fixture.Client;
+   //     }
 
-        [Fact]
-        public async Task TestGetStockItemsAsync()
-        {
-            // Arrange
-            var request = "/api/product";
+   //     [Fact]
+   //     public async Task TestGetStockItemsAsync()
+   //     {
+   //         // Arrange
+   //         var request = "/api/product";
 
-            // Act
-            var response = await Client.GetAsync(request);
+   //         // Act
+   //         var response = await Client.GetAsync(request);
 
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-    }
+   //         // Assert
+   //         response.EnsureSuccessStatusCode();
+   //     }
+   // }
 }
