@@ -74,6 +74,8 @@ namespace ProductAppApi.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Product product)
         {
+            //when the product id = 0 it means the api user didn't provide an id which won't get sql error in DB
+            //it also means that the user made it equal to zero which is also valid
             if (product.Id == 0)
             {
 
@@ -104,7 +106,11 @@ namespace ProductAppApi.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Product product)
         {
-            if (uni.Products.Get(id) != null && id != 0)
+            //here we check that there is and id not equal to zero bcs we don't have records od zero and the db start with one
+            //which means that user didn't provide an id or user provided it with zero
+            //we also check if that id's product exist in the db or not
+            //making the id!= 0 first so we don't have to go to db and come back to realise there's no such product
+            if (id != 0 && uni.Products.Get(id) != null)
             {
                 uni.Products.Update(uni.Products.MapProduct(id, product));
                 uni.complete();
